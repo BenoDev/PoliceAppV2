@@ -1,0 +1,43 @@
+//COLORS
+$color-primary: #8cd790;
+$color-primary-light: #d7fff1;
+$color-primary-dark: #77af9c;
+$color-primary-darkest: #285943;
+
+$color-grey-light-1: #f7f7f7;
+$color-grey-light-2: #eee;
+
+$color-grey-dark: #777;
+$color-grey-dark-2: #999;
+$color-grey-dark-3: #333;
+
+$main-font: "Roboto", sans-serif;
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+*,
+*::after,
+*::before {
+	box-sizing: inherit;
+}
+
+body {
+	box-sizing: border-box;
+	font-size: 62.5%;
+	font-family: $main-font;
+}
+
+.button {
+	border: none;
+	background-color: var(--color-grey-light-2);
+
+	&:focus {
+		outline: none;
+	}
+	&:active {
+		transform: translateY(2px);
+	}
+}

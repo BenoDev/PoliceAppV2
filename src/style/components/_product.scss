@@ -1,0 +1,36 @@
+.product {
+	display: flex;
+	height: 80vh;
+
+	&__photo-gallery {
+		flex-basis: 50%;
+	}
+	&__content {
+		flex-basis: 50%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	&__title {
+		padding: 2rem;
+		font-size: 2rem;
+	}
+	&__price {
+		font-size: 1.3rem;
+		padding-bottom: 1rem;
+	}
+	&__select {
+		margin: 1rem;
+	}
+	&__quantity {
+		margin-bottom: 1rem;
+	}
+	&__button {
+		margin-bottom: 4rem;
+	}
+}
+.image-gallery {
+	width: 85%;
+	padding: 1rem;
+	margin: 0 auto;
+}
