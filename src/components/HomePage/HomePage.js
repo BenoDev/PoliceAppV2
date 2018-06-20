@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import { Container } from "semantic-ui-react";
 
-import HeroSection from "./hero-section";
+import HeroSection from "./heroSection";
 import FeatureSection from "./feature-section";
 import CategoriesSection from "./categories-section";
 

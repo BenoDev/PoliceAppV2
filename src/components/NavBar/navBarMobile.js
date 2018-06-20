@@ -5,7 +5,9 @@ import {
   Responsive,
   Sidebar,
   Button,
-  Segment
+  Transition,
+  Segment,
+  Divider
 } from "semantic-ui-react";
 
 class NavBarMobile extends Component {
@@ -25,18 +27,20 @@ class NavBarMobile extends Component {
       <Responsive maxWidth={767}>
         <Sidebar.Pushable as={Segment}>
           <Sidebar
+            borderless
             as={Menu}
             animation="overlay"
             direction="right"
-            width="thin"
+            width="wide"
             visible={visible}
             vertical
             inverted
           >
-            <Menu.Item name="home">
+            <Menu.Item name="home" style={{ marginTop: "2rem" }}>
               <Icon name="home" />
               Home
             </Menu.Item>
+
             <Menu.Item name="gamepad">
               <Icon name="gamepad" />
               Games
@@ -48,13 +52,17 @@ class NavBarMobile extends Component {
           </Sidebar>
           <Sidebar.Pusher
             dimmed={visible}
-            onClick={this.toggleVisibility}
+            onClick={visible ? this.toggleVisibility : null}
             style={{ minHeight: "100vh" }}
           >
             <Menu
               style={{
                 borderRadius: "0",
-                backgroundColor: "transparent"
+                backgroundColor: "transparent",
+                margin: "0",
+                height: "4.5rem",
+                fontFamily: '"Roboto", sans-serif',
+                fontWeight: "700"
               }}
               borderless
             >

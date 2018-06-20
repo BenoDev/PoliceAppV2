@@ -20,7 +20,7 @@ class NavbarFeatures extends Component {
             borderRadius: "0",
             backgroundColor: "transparent",
             margin: "0",
-            height: "4rem",
+            height: "4.5rem",
             fontFamily: '"Roboto", sans-serif',
             fontWeight: "700"
           }}

@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import { Query } from "react-apollo";
 
 import gql from "graphql-tag";
+import { Grid } from "semantic-ui-react";
 
 import ShopProduct from "./shopProduct";
+import Sidebar from "./sidebarDesktop";
 
 class Shop extends Component {
 	state = {
@@ -59,11 +61,11 @@ class Shop extends Component {
 
 	render() {
 		return (
-			<div>
+			<Sidebar>
 				<div className="shop-container">
 					{this.renderProductsList()}
 				</div>
-			</div>
+			</Sidebar>
 		);
 	}
 }

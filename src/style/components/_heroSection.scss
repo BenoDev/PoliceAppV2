@@ -1,18 +1,59 @@
 .hero-section {
-	position: relative;
-
-	background-image: linear-gradient(
+	background-image:
+	 /*linear-gradient(
 			to right,
 			rgba(0, 0, 0, 0.5),
 			rgba(0, 0, 0, 0.5)
-		),
-		url("../assets/img/test.jpg");
+		),*/ url("../assets/img/hero-img.jpg");
 	background-size: cover;
 	background-position: center;
 	height: 100vh;
 	background-attachment: fixed;
 	width: 100%;
 	margin-bottom: 5rem;
+
+	&__button {
+		margin-top: 2rem;
+		background: $color-primary;
+		color: #fff;
+		border: none;
+		position: relative;
+		height: 60px;
+		font-size: 1.3rem;
+		font-weight: 600;
+		padding: 0 2em;
+		cursor: pointer;
+		transition: 800ms ease all;
+		outline: none;
+
+		&:hover {
+			background: #fff;
+			color: $color-primary;
+		}
+		&:before,
+		&:after {
+			content: "";
+			position: absolute;
+			top: 0;
+			right: 0;
+			height: 3px;
+			width: 0;
+			background: $color-primary;
+			transition: 400ms ease all;
+		}
+
+		&:after {
+			right: inherit;
+			top: inherit;
+			left: 0;
+			bottom: 0;
+		}
+		&:hover:before,
+		&:hover:after {
+			width: 100%;
+			transition: 800ms ease all;
+		}
+	}
 
 	&__text-box {
 		position: absolute;
@@ -40,17 +81,17 @@
 		font-size: 1.2rem;
 		font-weight: 300;
 	}
-	&__button {
-		border: none;
-		color: white;
-		font-size: 1.3rem;
-		font-weight: 600;
-		padding: 1rem 2rem;
-		border-radius: 1px;
-		margin-top: 3rem;
+	// &__button {
+	// 	border: none;
+	// 	color: white;
+	// 	font-size: 1.3rem;
+	// 	font-weight: 600;
+	// 	padding: 1rem 2rem;
+	// 	border-radius: 1px;
+	// 	margin-top: 3rem;
 
-		background-color: black;
+	// 	background-color: black;
 
-		border: none;
-	}
+	// 	border: none;
+	// }
 }

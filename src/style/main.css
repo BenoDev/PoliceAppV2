@@ -20,23 +20,53 @@ body {
   .button:active {
     transform: translateY(2px); }
 
+.ui.header {
+  font-family: "Roboto", sans-serif; }
+
 .container {
   position: relative; }
 
-.header {
-  position: absolute;
-  z-index: 100;
-  width: 100%; }
-
 .hero-section {
-  position: relative;
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../assets/img/test.jpg");
+  background-image: url("../assets/img/hero-img.jpg");
   background-size: cover;
   background-position: center;
   height: 100vh;
   background-attachment: fixed;
   width: 100%;
   margin-bottom: 5rem; }
+  .hero-section__button {
+    margin-top: 2rem;
+    background: #f76262;
+    color: #fff;
+    border: none;
+    position: relative;
+    height: 60px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    padding: 0 2em;
+    cursor: pointer;
+    transition: 800ms ease all;
+    outline: none; }
+    .hero-section__button:hover {
+      background: #fff;
+      color: #f76262; }
+    .hero-section__button:before, .hero-section__button:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 3px;
+      width: 0;
+      background: #f76262;
+      transition: 400ms ease all; }
+    .hero-section__button:after {
+      right: inherit;
+      top: inherit;
+      left: 0;
+      bottom: 0; }
+    .hero-section__button:hover:before, .hero-section__button:hover:after {
+      width: 100%;
+      transition: 800ms ease all; }
   .hero-section__text-box {
     position: absolute;
     top: 20vh;
@@ -55,16 +85,6 @@ body {
   .hero-section__paragraph {
     font-size: 1.2rem;
     font-weight: 300; }
-  .hero-section__button {
-    border: none;
-    color: white;
-    font-size: 1.3rem;
-    font-weight: 600;
-    padding: 1rem 2rem;
-    border-radius: 1px;
-    margin-top: 3rem;
-    background-color: black;
-    border: none; }
 
 .feature-section {
   width: 75%;
@@ -225,7 +245,7 @@ body {
   margin-left: 1rem; }
 
 .product-preview {
-  width: 12rem;
+  width: 18rem;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -247,7 +267,7 @@ body {
     font-size: 1.4rem; }
 
 .shop-container {
-  padding: 3rem 5rem;
+  padding: 3rem 0rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between; }
@@ -375,6 +395,7 @@ body {
 
 .ui.menu .item {
   font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
   letter-spacing: 2px;
   font-weight: 700 !important;
   transition: all 0.2s; }
@@ -427,3 +448,14 @@ body {
     transition-property: transform;
     transition-duration: 0.5s;
     transition-timing-function: ease-out; }
+
+/******mobile**********/
+.ui.sidebar.menu > .item {
+  transform: translateY(-100vh) !important;
+  opacity: 0;
+  transition: none; }
+
+.ui.sidebar.menu.visible > .item {
+  transform: translateY(0) !important;
+  opacity: 1;
+  transition: transform 800ms 100ms cubic-bezier(0.175, 0.885, 0.32, 1.275); }

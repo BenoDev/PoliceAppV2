@@ -1,8 +1,13 @@
-//COLORS
-$color-primary: #8cd790;
-$color-primary-light: #d7fff1;
-$color-primary-dark: #77af9c;
-$color-primary-darkest: #285943;
+// //COLORS
+// $color-primary: #8cd790;
+// $color-primary-light: #d7fff1;
+// $color-primary-dark: #77af9c;
+// $color-primary-darkest: #285943;
+
+$color-primary: #f76262;
+$color-secondary: #65c0ba;
+$color-secondary-light: #cffdf8;
+$color-secondary-dark: #216583;
 
 $color-grey-light-1: #f7f7f7;
 $color-grey-light-2: #eee;
@@ -40,4 +45,8 @@ body {
 	&:active {
 		transform: translateY(2px);
 	}
+}
+
+.ui.header {
+	font-family: $main-font;
 }
