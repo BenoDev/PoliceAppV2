@@ -13,10 +13,30 @@ import {
   Dropdown
 } from "semantic-ui-react";
 
+const orderOptions = [
+  { key: 1, text: "Rilevanza", value: "RELEVANCE" },
+  { key: 2, text: "Prezzo più alto", value: "desc" },
+  { key: 3, text: "Prezzo più basso", value: "asc" },
+  { key: 4, text: "Ultimi arrivi", value: "UPDATED_AT" }
+];
+
 class sidebar extends Component {
-  state = { visible: false };
+  state = {
+    visible: false,
+    itemOrder: orderOptions[0].value
+  };
 
   toggleVisibility = () => this.setState({ visible: !this.state.visible });
+  handleChange = (e, { value }) => {
+    this.setState({ itemOrder: value });
+    if (value === "RELEVANCE" || value == "UPDATED_AT") {
+      this.props.onOrderChange(value, null);
+    } else if (value === "asc" || value == "desc") {
+      this.props.onOrderChange(null, value);
+    } else {
+      this.props.onOrderChange(null, null);
+    }
+  };
 
   componentWillUpdate() {
     console.log(this.state.visible);
@@ -25,6 +45,7 @@ class sidebar extends Component {
   render() {
     const { children } = this.props;
     const { visible } = this.state;
+    const { itemOrder } = this.state;
 
     return (
       <Sidebar.Pushable fluid as={Container}>
@@ -88,28 +109,16 @@ class sidebar extends Component {
             )
           </Menu.Item>
           <Menu.Item>
-            Ordina:
-            <Dropdown
-              closeOnBlur
-              id="dropdown"
-              item
-              simple
-              text="Categories"
-              style={{ borderRadius: "0", width: "10rem", fontWeight: "700" }}
-            >
-              <Dropdown.Menu
-                style={{
-                  borderRadius: "0",
-                  border: "0",
-                  width: "10rem",
-                  fontWeight: "700"
-                }}
-              >
-                <Dropdown.Item>Electronics</Dropdown.Item>
-                <Dropdown.Item>Automotive</Dropdown.Item>
-                <Dropdown.Item>Home</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
+            <span>
+              Ordina:{" "}
+              <Dropdown
+                inline
+                onChange={this.handleChange}
+                style={{ borderRadius: "0", fontWeight: "700" }}
+                options={orderOptions}
+                value={itemOrder}
+              />
+            </span>
           </Menu.Item>
           <Menu.Item>
             <Icon name="sidebar" />

@@ -1,3 +1,4 @@
+import _ from "lodash";
 import React, { Component } from "react";
 import { Query } from "react-apollo";
 
@@ -9,11 +10,19 @@ import Sidebar from "./sidebarDesktop";
 
 class Shop extends Component {
 	state = {
-		filter: null
+		filter: null,
+		sortKey: "RELEVANCE",
+		priceOrder: null
 	};
 
 	onProductClick = id => {
 		this.props.history.push(`/product/${id}`);
+	};
+
+	onOrderChange = (sortKey, priceOrder) => {
+		this.setState({ sortKey, priceOrder }, () => {
+			console.log(this.state, "Lullabbiones");
+		});
 	};
 
 	componentWillMount() {
@@ -30,13 +39,33 @@ class Shop extends Component {
 			<Query
 				notifyOnNetworkStatusChange
 				query={PRODUCT_TYPE}
-				variables={{ productType: this.state.filter }}
+				variables={{
+					productType: this.state.filter,
+					sortKey: this.state.sortKey
+				}}
 			>
-				{({ loading, error, data }) => {
+				{({ loading, error, data, variables }) => {
 					if (loading) return "Loading...";
 					if (error) return `Error! ${error.message}`;
-					return data.shop.products.edges.map(product => {
-						console.log(product.node.id);
+					let products = data.shop.products.edges;
+
+					if (this.state.priceOrder) {
+						const orderedProducts = _.orderBy(
+							products,
+							e => {
+								return parseInt(
+									e.node.variants.edges[0].node.price
+								);
+							},
+							[this.state.priceOrder]
+						);
+
+						console.log(orderedProducts, "ordered prodcut");
+
+						products = orderedProducts;
+					}
+
+					return products.map(product => {
 						return (
 							<ShopProduct
 								key={product.node.id}
@@ -60,10 +89,12 @@ class Shop extends Component {
 	}
 
 	render() {
+		const { order } = this.props;
 		return (
-			<Sidebar>
+			<Sidebar onOrderChange={this.onOrderChange}>
 				<div className="shop-container">
 					{this.renderProductsList()}
+					{console.log(this.props, "ffdkdkdkf")}
 				</div>
 			</Sidebar>
 		);
@@ -100,9 +131,9 @@ const PRODUCT_LIST = gql`
 `;
 
 const PRODUCT_TYPE = gql`
-	query searchProductByType($productType: String) {
+	query searchProductByType($productType: String, $sortKey: ProductSortKeys) {
 		shop {
-			products(first: 20, query: $productType) {
+			products(first: 20, query: $productType, sortKey: $sortKey) {
 				edges {
 					node {
 						id

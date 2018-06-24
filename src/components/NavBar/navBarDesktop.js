@@ -32,6 +32,7 @@ class NavbarFeatures extends Component {
 
           <Menu.Menu position="right">
             <Dropdown
+              className="navbar-dropdown"
               closeOnBlur
               id="dropdown"
               item

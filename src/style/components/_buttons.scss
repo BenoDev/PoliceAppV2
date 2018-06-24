@@ -1,0 +1,131 @@
+// Variables
+$color: #c0392b;
+$color-dark: #a53125;
+$speed: "0.25s";
+$transition: all #{$speed} cubic-bezier(0.31, -0.105, 0.43, 1.4);
+
+/* Main Styles */
+.buttonRemove {
+    outline: none;
+    display: block;
+    background-color: $color;
+    width: 7.2rem;
+    height: 2.7rem;
+    line-height: 2.5rem;
+    margin: auto;
+    color: #fff;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 5px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.3);
+    transition: $transition;
+
+    span,
+    .icon {
+        display: block;
+        height: 100%;
+        text-align: center;
+        position: absolute;
+        top: 0;
+    }
+
+    span {
+        width: 72%;
+        line-height: inherit;
+        font-weight: 500;
+        font-size: 1rem;
+        text-transform: uppercase;
+        left: 0;
+        transition: $transition;
+
+        &:after {
+            content: "";
+            background-color: $color-dark;
+            width: 2px;
+            height: 70%;
+            position: absolute;
+            top: 15%;
+            right: -1px;
+        }
+    }
+
+    .icon {
+        width: 28%;
+        right: 5px;
+        transition: $transition;
+
+        .fa {
+            font-size: 1.5rem;
+            vertical-align: middle;
+            transition: $transition, height #{$speed} ease;
+        }
+
+        .fa-remove {
+            height: 36px;
+        }
+
+        .fa-check {
+            display: none;
+        }
+    }
+
+    &.success,
+    &:hover {
+        span {
+            left: -72%;
+            opacity: 0;
+        }
+
+        .icon {
+            right: 0;
+            width: 100%;
+
+            .fa {
+                font-size: 2rem;
+            }
+        }
+    }
+
+    &.success {
+        background-color: #27ae60;
+
+        .icon {
+            .fa-remove {
+                display: none;
+            }
+
+            .fa-check {
+                display: inline-block;
+            }
+        }
+    }
+
+    &:hover {
+        opacity: 0.9;
+
+        .icon .fa-remove {
+            height: 46px;
+        }
+    }
+
+    &:active {
+        opacity: 1;
+    }
+}
+
+//FASDE animation
+.fade-enter {
+    opacity: 0.01;
+}
+.fade-enter-active {
+    opacity: 1;
+    transition: opacity 1s ease-in;
+}
+.fade-exit {
+    opacity: 1;
+}
+.fade-exit-active {
+    transform: translateX(-100vw);
+    transition: transform 0.3s ease-in;
+}
