@@ -36,6 +36,7 @@ body {
   width: 100%;
   margin-bottom: 5rem; }
   .hero-section__button {
+    display: inline-block;
     margin-top: 2rem;
     background: #f76262;
     color: #fff;
@@ -47,7 +48,8 @@ body {
     padding: 0 2em;
     cursor: pointer;
     transition: 800ms ease all;
-    outline: none; }
+    outline: none;
+    vertical-align: middle; }
     .hero-section__button:hover {
       background: #fff;
       color: #f76262; }
@@ -330,6 +332,18 @@ body {
 .fade-exit-active {
   transform: translateX(-100vw);
   transition: transform 0.3s ease-in; }
+
+.label-animation {
+  animation: LABEL_ANIMATION 0.5s;
+  animation-direction: alternate;
+  animation-timing-function: cubic-bezier(0.5, 0.05, 1, 0.5);
+  animation-iteration-count: 6; }
+
+@keyframes LABEL_ANIMATION {
+  from {
+    transform: translate3d(0, 0px, 0); }
+  to {
+    transform: translate3d(0, 10px, 0); } }
 
 .product-preview {
   width: 18rem;

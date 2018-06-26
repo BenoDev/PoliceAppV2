@@ -14,6 +14,8 @@ import HomePage from "./HomePage/HomePage";
 import Shop from "./Shop/Shop";
 import ProductPage from "./ProductPage/ProductPage";
 import Cart from "./Cart/Cart";
+import LoginForm from "./Auth/loginForm";
+import SignupForm from "./Auth/signupForm";
 
 import {
 	createCheckout,
@@ -27,6 +29,8 @@ import {
 	associateCustomerCheckout
 } from "../apollo/checkout";
 
+import { customerCreate, customerAccessTokenCreate } from "../apollo/customer";
+
 import CheckoutFragment from "../apollo/fragment/checkoutFragment";
 
 class App extends Component {
@@ -34,6 +38,10 @@ class App extends Component {
 		super();
 
 		this.state = {
+			user: {
+				token: null,
+				customer: {}
+			},
 			checkout: { lineItems: { edges: [] } }
 		};
 	}
@@ -75,10 +83,22 @@ class App extends Component {
 		});
 	};
 
+	updateCustomer = (token, customer) => {
+		console.log(customer, "customer");
+		let newToken = token || this.state.user.token;
+		const newUser = {
+			token: newToken,
+			customer: { ...customer }
+		};
+		this.setState({ user: newUser }, () => {
+			console.log(this.state.user, "user");
+		});
+	};
+
 	render() {
 		return (
 			<BrowserRouter>
-				<NavBar>
+				<NavBar nProducts={this.state.checkout.lineItems.edges.length}>
 					<Switch>
 						<Route
 							path="/product/:id"
@@ -112,6 +132,31 @@ class App extends Component {
 
 						<Route path="/shop/:productType" component={Shop} />
 						<Route path="/shop" component={Shop} />
+						<Route
+							path="/login"
+							render={props => (
+								<LoginForm
+									{...props}
+									checkout={this.state.checkout}
+									checkoutCustomerAssociate={
+										this.props.checkoutCustomerAssociate
+									}
+									customerAccessTokenCreate={
+										this.props.customerAccessTokenCreate
+									}
+									updateCustomer={this.updateCustomer}
+								/>
+							)}
+						/>
+						<Route
+							path="/signup"
+							render={props => (
+								<SignupForm
+									{...props}
+									customerCreate={this.props.customerCreate}
+								/>
+							)}
+						/>
 						<Route path="/" component={HomePage} />
 					</Switch>
 				</NavBar>
@@ -140,6 +185,10 @@ export default withApollo(
 		graphql(checkoutLineItemsRemove, { name: "checkoutLineItemsRemove" }),
 		graphql(checkoutCustomerAssociate, {
 			name: "checkoutCustomerAssociate"
+		}),
+		graphql(customerCreate, { name: "customerCreate" }),
+		graphql(customerAccessTokenCreate, {
+			name: "customerAccessTokenCreate"
 		})
 	)(App)
 );

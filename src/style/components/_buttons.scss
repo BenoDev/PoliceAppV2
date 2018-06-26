@@ -129,3 +129,20 @@ $transition: all #{$speed} cubic-bezier(0.31, -0.105, 0.43, 1.4);
     transform: translateX(-100vw);
     transition: transform 0.3s ease-in;
 }
+
+//Label animation
+.label-animation {
+    animation: LABEL_ANIMATION 0.5s;
+    animation-direction: alternate;
+    animation-timing-function: cubic-bezier(0.5, 0.05, 1, 0.5);
+    animation-iteration-count: 6;
+}
+
+@keyframes LABEL_ANIMATION {
+    from {
+        transform: translate3d(0, 0px, 0);
+    }
+    to {
+        transform: translate3d(0, 10px, 0);
+    }
+}

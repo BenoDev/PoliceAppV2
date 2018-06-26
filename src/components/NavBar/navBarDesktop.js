@@ -2,7 +2,9 @@ import React, { Component } from "react";
 
 import { Link } from "react-router-dom";
 
-import { Menu, Icon, Dropdown, Responsive } from "semantic-ui-react";
+import { Menu, Icon, Dropdown, Responsive, Label } from "semantic-ui-react";
+
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 class NavbarFeatures extends Component {
   state = { activeItem: "home" };
@@ -68,11 +70,27 @@ class NavbarFeatures extends Component {
               style={{ marginRight: "4rem" }}
             />
             <Menu.Item
+              as={Link}
+              to="/cart"
               name="carrello"
               active={activeItem === "video play"}
               onClick={this.handleItemClick}
             >
-              <Icon name="cart" />
+              <Icon name="cart" size="large" />
+              <Label
+                key={this.props.nProducts}
+                className="label-animation"
+                circular
+                size="mini"
+                style={{
+                  marginLeft: "-1.1rem",
+                  marginBottom: "-0.7rem",
+                  zIndex: "5000",
+                  backgroundColor: "#f76262"
+                }}
+              >
+                {this.props.nProducts}
+              </Label>
             </Menu.Item>
             <Menu.Item
               name="User"

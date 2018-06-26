@@ -24,9 +24,9 @@ export default () => (
 			>
 				Lorem ipsum dolor sit ameteligendi
 			</Header>
-			<button className="hero-section__button" as={Link} to="/shop">
-				Vai al negozio
-			</button>
+			<Link to="/shop">
+				<button className="hero-section__button">Vai al negozio</button>
+			</Link>
 		</div>
 	</Container>
 );
