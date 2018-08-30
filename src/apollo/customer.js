@@ -38,3 +38,12 @@ export const getCustomer = gql`
   }
   ${CustomerFragment}
 `;
+
+export const getCustomerEmail = gql`
+  query getCustomerName($customerAccessToken: String!) {
+    customer(customerAccessToken: $customerAccessToken) {
+      id
+      email
+    }
+  }
+`;

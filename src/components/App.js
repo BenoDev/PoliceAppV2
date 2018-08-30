@@ -16,6 +16,7 @@ import ProductPage from "./ProductPage/ProductPage";
 import Cart from "./Cart/Cart";
 import LoginForm from "./Auth/loginForm";
 import SignupForm from "./Auth/signupForm";
+import UserPage from "./UserPage/UserPage";
 
 import {
 	createCheckout,
@@ -29,7 +30,12 @@ import {
 	associateCustomerCheckout
 } from "../apollo/checkout";
 
-import { customerCreate, customerAccessTokenCreate } from "../apollo/customer";
+import {
+	customerCreate,
+	customerAccessTokenCreate,
+	getCustomer,
+	getCustomerEmail
+} from "../apollo/customer";
 
 import CheckoutFragment from "../apollo/fragment/checkoutFragment";
 
@@ -48,6 +54,7 @@ class App extends Component {
 
 	componentDidMount() {
 		this.initCheckout();
+		this.initCustomer();
 	}
 
 	initCheckout = async () => {
@@ -95,10 +102,38 @@ class App extends Component {
 		});
 	};
 
+	initCustomer = async () => {
+		const authToken = localStorage.getItem("auth-token");
+
+		console.log(authToken, "User Token");
+
+		if (authToken) {
+			const res = await this.props.client.query({
+				query: getCustomerEmail,
+				variables: {
+					customerAccessToken: JSON.parse(authToken)
+				}
+			});
+			if (res.data.customer) {
+				//utente autorizzato
+				this.updateCustomer(JSON.parse(authToken), res.data.customer);
+			} else {
+				this.updateCustomer(null, null);
+			}
+		}
+	};
+
 	render() {
+		let isAuth = this.state.user.token;
+		let customer = this.state.user.customer;
+
 		return (
 			<BrowserRouter>
-				<NavBar nProducts={this.state.checkout.lineItems.edges.length}>
+				<NavBar
+					nProducts={this.state.checkout.lineItems.edges.length}
+					isAuth={isAuth}
+					customer={customer}
+				>
 					<Switch>
 						<Route
 							path="/product/:id"
@@ -157,6 +192,14 @@ class App extends Component {
 								/>
 							)}
 						/>
+
+						<Route
+							path="/userpage"
+							render={props => (
+								<UserPage {...props} user={this.state.user} />
+							)}
+						/>
+
 						<Route path="/" component={HomePage} />
 					</Switch>
 				</NavBar>

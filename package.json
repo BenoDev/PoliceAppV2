@@ -1,5 +1,6 @@
 {
   "name": "policev2",
+  "homepage": "http://BenoDev.github.io/PoliceAppV2",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -25,10 +26,13 @@
     "semantic-ui-react": "^0.81.1"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build-semantic": "cd src/semantic && gulp build-css build-assets",
     "watch-semantic": "cd src/semantic && npm run build-semantic && gulp watch",
     "build-css": "node-sass-chokidar src/ -o src/",
-    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
+    "watch-css":
+      "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
     "build-js": "react-scripts build",
@@ -37,7 +41,11 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "gh-pages": "^1.2.0",
     "gulp": "^3.9.1",
     "gulp-clone": "^2.0.1"
+  },
+  "engines": {
+    "node": "8.9.4"
   }
 }

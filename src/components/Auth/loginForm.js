@@ -6,7 +6,14 @@ import { getCustomer } from "../../apollo/customer";
 
 import { Link } from "react-router-dom";
 
-import { Button, Form, Segment, Message } from "semantic-ui-react";
+import {
+	Button,
+	Form,
+	Grid,
+	Message,
+	Container,
+	Segment
+} from "semantic-ui-react";
 
 class LoginForm extends Component {
 	componentDidMount() {
@@ -113,48 +120,53 @@ class LoginForm extends Component {
 						handleSubmit,
 						isSubmitting
 					}) => (
-						<Segment inverted>
-							{console.log(errors, "errori")}
-							<Form inverted onSubmit={handleSubmit}>
-								<Form.Group widths="equal">
-									<Form.Input
-										name="email"
-										onChange={handleChange}
-										onBlur={handleBlur}
-										fluid
-										label="Email"
-										placeholder="Email"
-										value={values.email}
-									/>
+						<Container>
+							<Grid centered padded columns={3}>
+								<Grid.Column
+									as={Segment}
+									inverted
+									textAlign="center"
+								>
+									<Form inverted onSubmit={handleSubmit}>
+										<Form.Input
+											name="email"
+											onChange={handleChange}
+											onBlur={handleBlur}
+											fluid
+											label="Email"
+											placeholder="Email"
+											value={values.email}
+										/>
 
-									<Form.Input
-										name="password"
-										onChange={handleChange}
-										onBlur={handleBlur}
-										fluid
-										label="Password"
-										placeholder="Password"
-										value={values.password}
-									/>
-								</Form.Group>
-								<Form.Checkbox label="I agree to the Terms and Conditions" />
-								<Button type="submit">Submit</Button>
-							</Form>
-							{touched.email &&
-								errors.email && (
-									<Message
-										error
-										header="Action Forbidden"
-										content={errors.email}
-									/>
-								)}
-							{touched.password &&
-								errors.password && (
-									<div className="login__error">
-										{errors.password}
-									</div>
-								)}
-						</Segment>
+										<Form.Input
+											name="password"
+											onChange={handleChange}
+											onBlur={handleBlur}
+											fluid
+											label="Password"
+											placeholder="Password"
+											value={values.password}
+											style={{ marginBottom: "2rem" }}
+										/>
+
+										<Button type="submit">Submit</Button>
+									</Form>
+									{touched.email &&
+										errors.email && (
+											<Message
+												error
+												content={errors.email}
+											/>
+										)}
+									{touched.password &&
+										errors.password && (
+											<div className="login__error">
+												{errors.password}
+											</div>
+										)}
+								</Grid.Column>
+							</Grid>
+						</Container>
 					)}
 				/>
 			</div>

@@ -13,7 +13,7 @@ class NavbarFeatures extends Component {
 
   render() {
     const { activeItem } = this.state;
-    const { children } = this.props;
+    const { children, isAuth, customer } = this.props;
 
     return (
       <Responsive minWidth={768}>
@@ -22,7 +22,7 @@ class NavbarFeatures extends Component {
             borderRadius: "0",
             backgroundColor: "transparent",
             margin: "0",
-            height: "4.5rem",
+            height: "4rem",
             fontFamily: '"Roboto", sans-serif',
             fontWeight: "700"
           }}
@@ -93,12 +93,38 @@ class NavbarFeatures extends Component {
               </Label>
             </Menu.Item>
             <Menu.Item
+              as={Link}
+              to="/userpage"
               name="User"
               active={activeItem === "video play"}
               onClick={this.handleItemClick}
-              style={{ marginRight: "4rem" }}
+              style={{ marginRight: "1rem" }}
             >
-              <Icon name="user" />
+              <Label
+                style={{
+                  color: "#f76262",
+                  backgroundColor: "#fff",
+                  letterSpacing: "1px"
+                }}
+              >
+                {isAuth ? customer.email : "Benvenuto, cliente"}
+              </Label>
+              <Dropdown closeOnBlur id="dropdownUser" simple icon="user">
+                <Dropdown.Menu
+                  style={{
+                    borderRadius: "0",
+                    border: "0",
+                    width: "10rem",
+                    fontWeight: "700"
+                  }}
+                >
+                  <Dropdown.Item as={Link} to="/shop/boots">
+                    I mie Ordini
+                  </Dropdown.Item>
+                  <Dropdown.Item>Indirizzi</Dropdown.Item>
+                  <Dropdown.Item>Logout</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
             </Menu.Item>
           </Menu.Menu>
         </Menu>

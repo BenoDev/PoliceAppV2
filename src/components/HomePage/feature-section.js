@@ -1,6 +1,6 @@
-import React from 'react';
-import featureImage1 from '../../assets/img/feature1.jpg';
-import featureImage2 from '../../assets/img/feature2.jpg';
+import React from "react";
+import featureImage1 from "../../assets/img/feature1.jpg";
+import featureImage2 from "../../assets/img/feature2.jpg";
 
 export default () => {
 	return (
